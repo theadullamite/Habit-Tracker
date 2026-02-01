@@ -1,32 +1,33 @@
 import './App.css'
 import { useState } from 'react'
+import HabitForm from './components/HabitForm';
+import HabitList from './components/HabitList';
+
 
 //defining the habit data structure
-const habitData = {
+const habits = {
   id: '',
   name: '',
   frequency: '',
   color: '',
-  startDate: 0,
-  successes: ['']
+  createdAt: '2026-01-24',
+  completedDays: ['']
 }
 
 function App() {
   //using state to capture user input
-  const [formData, setFormData] = useState(habitData);
+  const [habits, setHabits] = useState([]);
+  
+  const addHabit = (newHabit) => {
+    setHabits([...habits, newHabit]);
+  };
 
   return (
-    <>
     <div>
-      <h1>Creating a habit tracker app</h1>
-      <form>
-        <input />
-        <input />
-        <button>Add Habit</button>
-        <button>Edit Habit</button>
-      </form>
+      <h1>Habit Tracker</h1>
+      <HabitForm onAddHabit={addHabit} />
+      <HabitList habits={habits}/>
     </div>
-    </>
   )
 }
 
