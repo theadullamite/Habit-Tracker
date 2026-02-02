@@ -7,7 +7,7 @@ function HabitForm({ onAddHabit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim() === "") return;
+    if (name.trim() === "") return;
 
     const newHabit = {
         id: Date.now().toString(),
@@ -15,6 +15,7 @@ function HabitForm({ onAddHabit }) {
         frequency,
         startDate,
     };
+    
     onAddHabit(newHabit); //calls the function passed from the parent component
 
     setName('');
@@ -27,6 +28,7 @@ function HabitForm({ onAddHabit }) {
       <div>
         <label htmlFor="habitName">Habit Name:</label>
         <input
+        id="habitName"
           type="text"
           placeholder="Enter a new habit"
           value={name}
@@ -36,6 +38,7 @@ function HabitForm({ onAddHabit }) {
       <div>
         <label htmlFor="frequency">Frequency:</label>
         <select
+        id="frequency"
           value={frequency}
           onChange={(e) => setFrequency(e.target.value)}
         >
