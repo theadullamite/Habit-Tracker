@@ -1,8 +1,9 @@
 import HabitItem from "./HabitItem";
+import './HabitList.css';
 
 const HabitList = ({ habits, onRemove, onEdit }) => {
   return (
-    <div>
+    <div className='habit-list'>
       <h2>Current Habits</h2>
       {habits.length === 0 ? (
         <p>No habits added yet.</p>
