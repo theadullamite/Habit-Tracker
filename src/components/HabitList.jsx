@@ -1,6 +1,6 @@
 import HabitItem from "./HabitItem";
 
-const HabitList = ({ habits, onRemove }) => {
+const HabitList = ({ habits, onRemove, onEdit }) => {
   return (
     <div>
       <h2>Current Habits</h2>
@@ -10,16 +10,11 @@ const HabitList = ({ habits, onRemove }) => {
         <ul>
           {habits.map((habit) => (
             <li key={habit.id}>
-              <div>
-                <strong>{habit.name}</strong>
-                <span>- {habit.frequency}</span>
-                <span>(Starts: {habit.startDate})</span>
-              </div>
+              <HabitItem habit={habit} onRemove={onRemove} onEdit={onEdit} />
             </li>
           ))}
         </ul>
       )}
-      <HabitItem key={habits.id} habit={habits} onRemove={onRemove}/>
     </div>
   );
 };
