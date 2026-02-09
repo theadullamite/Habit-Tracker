@@ -1,7 +1,7 @@
 import HabitItem from "./HabitItem";
 import './HabitList.css';
 
-const HabitList = ({ habits, onRemove, onEdit }) => {
+const HabitList = ({ habits, onRemove, onEdit, setHabits }) => {
   return (
     <div className='habit-list'>
       <h2>Current Habits</h2>
@@ -11,7 +11,13 @@ const HabitList = ({ habits, onRemove, onEdit }) => {
         <ul>
           {habits.map((habit) => (
             <li key={habit.id}>
-              <HabitItem habit={habit} onRemove={onRemove} onEdit={onEdit} />
+              <HabitItem 
+              habit={habit} 
+              onRemove={onRemove} 
+              onEdit={onEdit}
+              key={habit.id} 
+              setHabits={setHabits}
+              />
             </li>
           ))}
         </ul>

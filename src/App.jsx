@@ -3,9 +3,15 @@ import HabitForm from './components/HabitForm';
 import HabitList from './components/HabitList';
 import "./App.css";
 
+
+
+
 function App() {
   //using state to capture user input
-  const [habits, setHabits] = useState([]);
+  const [habits, setHabits] = useState([
+    {id: '1', name: "Drink Water", logs: {} },
+    { id: '2', name: "Exercise", logs: {} },
+  ]);
 
   //function to add a habit
   const addHabit = (newHabit) => {
@@ -29,7 +35,7 @@ function App() {
     <div className="app">
       <h1 className="app-title">Habit Tracker</h1>
       <HabitForm onAddHabit={addHabit} />
-      <HabitList habits={habits} onRemove={removeHabit} onEdit={editHabit}/>
+      <HabitList habits={habits} setHabits={setHabits} onRemove={removeHabit} onEdit={editHabit}/>
     </div>
   );
 }

@@ -1,9 +1,37 @@
 import { useState } from "react";
 import './HabitItem.css';
 
-function HabitItem({ habit, onRemove, onEdit }) {
+
+//generating today's date
+  const getToday = () => {
+    return new Date().toISOString().split("T")[0];
+  };
+
+
+function HabitItem({ habit, onRemove, onEdit, setHabits }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(habit.name);
+
+  const today = getToday();
+  const isCompletedToday = habit.logs[today];
+
+
+ // the toggle function
+  const toggleToday = () => {
+    setHabits(prevHabits => 
+      prevHabits.map(h =>
+        h.id === habit.id
+        ? {
+          ...h,
+          logs: {
+            ...h.logs,
+            [today]: !h.logs[today]
+          }
+        }
+        : h
+      )
+    );
+  };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +75,9 @@ function HabitItem({ habit, onRemove, onEdit }) {
       <span className="habit-name">{habit.name}</span>
       <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
       <button className="remove-btn" onClick={() => onRemove(habit.id)}>Remove</button>
+      <button onClick={toggleToday}>
+        {isCompletedToday ? "Completed ✅" : "Mark Done"}
+      </button>
     </div>
   );
 }
