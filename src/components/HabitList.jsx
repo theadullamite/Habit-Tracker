@@ -1,9 +1,13 @@
 import HabitItem from "./HabitItem";
-import './HabitList.css';
+import "./HabitList.css";
 
 const HabitList = ({ habits, onRemove, onEdit, setHabits }) => {
+  const today = new Date().toISOString().split("T")[0];
+
+  const completedCount = habits.filter((habit) => habit.logs?.[today]).length;
+
   return (
-    <div className='habit-list'>
+    <div className="habit-list">
       <h2>Current Habits</h2>
       {habits.length === 0 ? (
         <p>No habits added yet.</p>
@@ -11,17 +15,20 @@ const HabitList = ({ habits, onRemove, onEdit, setHabits }) => {
         <ul>
           {habits.map((habit) => (
             <li key={habit.id}>
-              <HabitItem 
-              habit={habit} 
-              onRemove={onRemove} 
-              onEdit={onEdit}
-              key={habit.id} 
-              setHabits={setHabits}
+              <HabitItem
+                habit={habit}
+                onRemove={onRemove}
+                onEdit={onEdit}
+                key={habit.id}
+                setHabits={setHabits}
               />
             </li>
           ))}
         </ul>
       )}
+      <p>
+        {completedCount} /{habits.length} habits completed today
+      </p>
     </div>
   );
 };

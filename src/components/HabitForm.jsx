@@ -1,27 +1,30 @@
 import { useState } from "react";
-import  "./HabitForm.css";
+import "./HabitForm.css";
 
 function HabitForm({ onAddHabit }) {
   const [name, setName] = useState("");
   const [frequency, setFrequency] = useState("daily");
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().split("T")[0],
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim() === "") return;
 
     const newHabit = {
-        id: Date.now().toString(),
-        name,
-        frequency,
-        startDate,
+      id: Date.now().toString(),
+      name,
+      frequency,
+      startDate,
+      logs: {},
     };
-    
+
     onAddHabit(newHabit); //calls the function passed from the parent component
 
-    setName('');
-    setFrequency('daily');
-    setStartDate(new Date().toISOString().split('T')[0]);//to reset the form
+    setName("");
+    setFrequency("daily");
+    setStartDate(new Date().toISOString().split("T")[0]); //to reset the form
   };
 
   return (
@@ -29,7 +32,7 @@ function HabitForm({ onAddHabit }) {
       <div>
         <label htmlFor="habitName">Habit Name:</label>
         <input
-        id="habitName"
+          id="habitName"
           type="text"
           placeholder="Enter a new habit"
           value={name}
@@ -39,7 +42,7 @@ function HabitForm({ onAddHabit }) {
       <div>
         <label htmlFor="frequency">Frequency:</label>
         <select
-        id="frequency"
+          id="frequency"
           value={frequency}
           onChange={(e) => setFrequency(e.target.value)}
         >
