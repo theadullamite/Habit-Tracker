@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createHabit } from "./createHabit";
 import "./HabitForm.css";
 
 function HabitForm({ onAddHabit }) {
@@ -12,13 +13,11 @@ function HabitForm({ onAddHabit }) {
     e.preventDefault();
     if (name.trim() === "") return;
 
-    const newHabit = {
-      id: Date.now().toString(),
+    const newHabit = createHabit({
       name,
       frequency,
       startDate,
-      logs: {},
-    };
+    });
 
     onAddHabit(newHabit); //calls the function passed from the parent component
 

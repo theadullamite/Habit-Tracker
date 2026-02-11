@@ -8,10 +8,8 @@ function App() {
   const [habits, setHabits] = useState(() => {
     const saved = localStorage.getItem("habits");
     return saved ? JSON.parse(saved) : [];
-  }, [
-    { id: "1", name: "Drink Water", logs: {} },
-    { id: "2", name: "Exercise", logs: {} },
-  ]);
+  }, 
+);
 
   //function to add a habit
   const addHabit = (newHabit) => {
