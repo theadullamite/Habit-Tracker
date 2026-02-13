@@ -24,7 +24,7 @@ export const HabitProgressChart = ({ data }) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis domain={[0, 1]} ticks={[0, 1]}/>
           <Tooltip />
           <Legend />
           <Bar dataKey="completed" stackId="a" fill="#82ca9d" />

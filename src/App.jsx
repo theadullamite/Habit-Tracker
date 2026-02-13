@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import HabitForm from "./components/HabitForm";
 import HabitList from "./components/HabitList";
 import "./App.css";
 import { HabitProgressChart } from "./components/HabitProgressChart";
-import { createHabit } from './components/createHabit';
+import { prepareChartData } from "./utils/chartHelpers";
 
-function App() {  
+function App() {
   //using state to capture user input
   const [habits, setHabits] = useState(() => {
     const saved = localStorage.getItem("habits");
@@ -35,23 +35,7 @@ function App() {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
 
-  // useEffect(() => {
-  //   const rawData = createHabit({ name: "", frequency: ""});
-  //   const processData = processLogsForChart(rawData);
-  //   setHabits(processData);
-  // }, []);
-
-  //processing the raw data into the chart-friendly format
-  // const processLogsForChart = (rawData) => {
-  //   //logic to map raw logs to the format
-  //   return rawData.map((log, index) => ({
-  //     name: `Day ${index + 1}`,
-  //     completed: log.isCompleted ? 1 : 0,
-  //     missed: log.isCompleted ? 0 : 1,
-  //   }));
-  // };
-
-  
+  const chartData = useMemo(() => prepareChartData(selectedHabit), [selectedHabit]);
 
   return (
     <div className="app">
@@ -65,7 +49,7 @@ function App() {
       />
       <div>
         {habits.length > 0 ? (
-          <HabitProgressChart data={habits} />
+          <HabitProgressChart data={chartData} />
         ) : (
           <p>Log some habits to see your progress!</p>
         )}
