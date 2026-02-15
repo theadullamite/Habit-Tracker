@@ -11,26 +11,94 @@ import {
 
 export const HabitProgressChart = ({ data }) => {
   return (
-    <div style={{ width: "100%", height: 300 }}>
-      <ResponsiveContainer>
-        <BarChart
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis domain={[0, 1]} ticks={[0, 1]}/>
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="completed" stackId="a" fill="#82ca9d" />
-          <Bar dataKey="missed" stackId="a" fill="#ff7300" />
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="chart-card">
+      <h2 className="chart-title">Habit Chart</h2>
+
+      <div className="chart-container">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <defs>
+              <linearGradient
+                id="completedGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="5%" stopColor="#4facfe" stopOpacity={0.9} />
+                <stop offset="95%" stopColor="#00f2fe" stopOpacity={0.7} />
+              </linearGradient>
+
+              <linearGradient id="missedGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#ff512f" stopOpacity={0.9} />
+                <stop offset="95%" stopColor="#dd2476" stopOpacity={0.7} />
+              </linearGradient>
+            </defs>
+
+            <CartesianGrid
+              strokeDasharray="4 4"
+              stroke="rgba(255,255,255,0.1)"
+            />
+
+            <XAxis
+              dataKey="name"
+              tick={{ fill: "#ccc", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+
+            <YAxis
+              domain={[0, 1]}
+              ticks={[0, 1]}
+              tick={{ fill: "#ccc", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(20, 20, 30, 0.9)",
+                border: "none",
+                borderRadius: "12px",
+                color: "#fff",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+              }}
+            />
+
+            <Legend
+              wrapperStyle={{
+                color: "#ddd",
+                paddingTop: "10px",
+              }}
+            />
+
+            <Bar
+              dataKey="completed"
+              stackId="a"
+              fill="url(#completedGradient)"
+              radius={[6, 6, 0, 0]}
+              isAnimationActive
+              animationDuration={1000}
+            />
+
+            <Bar
+              dataKey="missed"
+              stackId="a"
+              fill="url(#missedGradient)"
+              radius={[6, 6, 0, 0]}
+              isAnimationActive
+              animationDuration={1000}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ export const prepareChartData = (habit) => {
 
     return last7days.map(day => {
         const dateKey = format(day, 'yyyy-MM-dd');
-        const status = habit.logs[dateKey];
+        const status = habit.logs?.[dateKey];
 
         return {
             name: format(day, 'MMM dd'),

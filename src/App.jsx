@@ -8,8 +8,20 @@ import { prepareChartData } from "./utils/chartHelpers";
 function App() {
   //using state to capture user input
   const [habits, setHabits] = useState(() => {
-    const saved = localStorage.getItem("habits");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("habits");
+      if (!saved) return [];
+
+      const parsed = JSON.parse(saved);
+
+      //normalizing shape
+      return parsed.map((habit) => ({
+        ...habit,
+        logs: habit.logs || {},
+      }));
+    } catch {
+      return [];
+    }
   });
 
   //function to add a habit
@@ -35,7 +47,7 @@ function App() {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
 
-  const chartData = useMemo(() => prepareChartData(selectedHabit), [selectedHabit]);
+  const chartData = useMemo(() => prepareChartData(habits), [habits]);
 
   return (
     <div className="app">
