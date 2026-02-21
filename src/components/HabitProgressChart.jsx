@@ -17,13 +17,16 @@ export const HabitProgressChart = ({ data }) => {
       <div className="chart-container">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
+          // style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
+          // responsive
             data={data}
             margin={{
               top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
+             right: 10,
+              left: 10,
+             bottom: 5,
             }}
+            barCategoryGap="40%"
           >
             <defs>
               <linearGradient
@@ -57,6 +60,7 @@ export const HabitProgressChart = ({ data }) => {
 
             <YAxis
               domain={[0, 1]}
+              width={30}
               ticks={[0, 1]}
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
