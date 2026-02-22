@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import './HabitProgressChart.css';
 
 export const HabitProgressChart = ({ data }) => {
   return (
@@ -17,16 +18,15 @@ export const HabitProgressChart = ({ data }) => {
       <div className="chart-container">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-          // style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
-          // responsive
             data={data}
             margin={{
-              top: 5,
-             right: 10,
-              left: 10,
+              top: 2,
+             right: 30,
+              left: 20,
              bottom: 5,
             }}
-            barCategoryGap="40%"
+            barCategoryGap="10%"
+            barSize='10%'
           >
             <defs>
               <linearGradient
@@ -47,7 +47,7 @@ export const HabitProgressChart = ({ data }) => {
             </defs>
 
             <CartesianGrid
-              strokeDasharray="4 4"
+              strokeDasharray="3 3"
               stroke="rgba(255,255,255,0.1)"
             />
 
@@ -81,6 +81,7 @@ export const HabitProgressChart = ({ data }) => {
                 color: "#ddd",
                 paddingTop: "10px",
               }}
+              // align="center"
             />
 
             <Bar
