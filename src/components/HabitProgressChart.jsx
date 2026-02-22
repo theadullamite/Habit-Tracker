@@ -20,12 +20,12 @@ export const HabitProgressChart = ({ data }) => {
           <BarChart
             data={data}
             margin={{
-              top: 2,
+              top: 10,
              right: 30,
-              left: 20,
-             bottom: 5,
+              left: 0,
+             bottom: 0,
             }}
-            barCategoryGap="10%"
+            barCategoryGap="20%"
             barSize='10%'
           >
             <defs>
@@ -56,11 +56,12 @@ export const HabitProgressChart = ({ data }) => {
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
+              dy={10}
             />
 
             <YAxis
               domain={[0, 1]}
-              width={30}
+              width={25}
               ticks={[0, 1]}
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
@@ -79,8 +80,10 @@ export const HabitProgressChart = ({ data }) => {
             <Legend
               wrapperStyle={{
                 color: "#ddd",
-                paddingTop: "10px",
+                paddingTop: "20px"
               }}
+              verticalAlign="bottom"
+              align="center"
               // align="center"
             />
 
@@ -91,6 +94,7 @@ export const HabitProgressChart = ({ data }) => {
               radius={[6, 6, 0, 0]}
               isAnimationActive
               animationDuration={1000}
+              barSize={40}
             />
 
             <Bar
