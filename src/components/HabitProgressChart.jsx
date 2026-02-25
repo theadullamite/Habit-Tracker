@@ -16,7 +16,7 @@ export const HabitProgressChart = ({ data }) => {
       <h2 className="chart-title">Habit Chart</h2>
 
       <div className="chart-container">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="57%" height={350}>
           <BarChart
             data={data}
             margin={{
