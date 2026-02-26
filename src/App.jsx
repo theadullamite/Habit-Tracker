@@ -48,6 +48,7 @@ function App() {
   }, [habits]);
 
   const chartData = useMemo(() => prepareChartData(habits), [habits]);
+  console.log(habits);
 
   return (
     <div className="app">

@@ -8,17 +8,50 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import './HabitProgressChart.css';
+import "./HabitProgressChart.css";
 
 export const HabitProgressChart = ({ data }) => {
+  console.log(data);
   return (
     <div className="chart-card">
       <h2 className="chart-title">Habit Chart</h2>
 
       <div className="chart-container">
-        <ResponsiveContainer width="57%" height={350}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data}
+          margin={{ top: 20, right: 20, left: 20, bottom: 40 }}
+          >
+            <XAxis dataKey="name" />
+            <YAxis 
+            domain={[0, 1]}
+            allowDecimals={false}
+            width={30}
+            tick={{ fill: "#ccc", fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+            />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="completed" fill="#22c55e" barSize={40} />
+            <Bar dataKey="missed" fill="#ef4444" barSize={40} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+    
+  );
+};
+
+{
+  /* <ResponsiveContainer width="100%" height={300} style={{ border: "3px solid" }}>
           <BarChart
+          width={800}
+          height={300}
+          
             data={data}
+            style={{
+              border: "4px solid orange",
+            }}
             margin={{
               top: 10,
              right: 30,
@@ -56,16 +89,17 @@ export const HabitProgressChart = ({ data }) => {
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
-              dy={10}
+              dy={4}
             />
 
             <YAxis
               domain={[0, 1]}
-              width={25}
+              width={10}
               ticks={[0, 1]}
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
+              
             />
             <Tooltip
               contentStyle={{
@@ -106,8 +140,5 @@ export const HabitProgressChart = ({ data }) => {
               animationDuration={1000}
             />
           </BarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-  );
-};
+        </ResponsiveContainer> */
+}

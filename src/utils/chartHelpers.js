@@ -1,6 +1,6 @@
 import { format, subDays, eachDayOfInterval } from 'date-fns';
 
-export const prepareChartData = (habit) => {
+export const prepareChartData = (habits) => {
     // Defining the range (e.g., last 7 days)
     const last7days = eachDayOfInterval({
         start: subDays(new Date(), 6),
@@ -9,12 +9,22 @@ export const prepareChartData = (habit) => {
 
     return last7days.map(day => {
         const dateKey = format(day, 'yyyy-MM-dd');
-        const status = habit.logs?.[dateKey];
+
+        let completedCount = 0;
+        let missedCount = 0;
+
+        habits.forEach((habit) => {
+            const status = habit.logs?.[dateKey];
+
+            if (status === true) completedCount++;
+            if (status === false) missedCount++;
+        });
+        
 
         return {
             name: format(day, 'MMM dd'),
-            completed: status === true ? 1 : 0,
-            missed: status === false ? 1 : 0,
+            completed: completedCount,
+            missed: missedCount,
         };
     });
 };
