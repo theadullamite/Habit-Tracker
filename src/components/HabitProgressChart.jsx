@@ -11,32 +11,35 @@ import {
 import "./HabitProgressChart.css";
 
 export const HabitProgressChart = ({ data }) => {
+  console.log("data length:", data?.length);
   console.log(data);
+
+  if (!data || data.length === 0) {
+    return <div className="chart-card">Loading chart...</div>;
+  }
+  
   return (
     <div className="chart-card">
       <h2 className="chart-title">Habit Chart</h2>
-
       <div className="chart-container">
-        <ResponsiveContainer width="95%" height="100%">
+        <ResponsiveContainer width="100%" aspect={2}>
           <BarChart data={data}
-          width={500}
-          height={300}
-          margin={{ top: 10, right: 30, left: -10, bottom: 5 }}
+          margin={{ top: 10, right: 20, left: 0, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis 
             domain={[0, 1]}
             allowDecimals={false}
-            width={30}
+            
             tick={{ fill: "#ccc", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
             />
             <Tooltip />
             <Legend />
-            <Bar dataKey="completed" fill="#22c55e" barSize={40} />
-            <Bar dataKey="missed" fill="#ef4444" barSize={40} />
+            <Bar dataKey="completed" fill="#22c55e" />
+            <Bar dataKey="missed" fill="#ef4444" />
           </BarChart>
         </ResponsiveContainer>
       </div>
