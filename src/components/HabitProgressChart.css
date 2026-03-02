@@ -1,4 +1,8 @@
 .chart-card {
+  position: relative;
+  margin: 2rem auto;
+ 
+  
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 20px;
@@ -28,8 +32,8 @@
 .chart-card:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(79, 172, 254, 0.2);
+    0 25px 60px rgba(199, 188, 188, 0.4),
+    0 0 60px rgba(200, 224, 244, 0.2);
 }
 
 .chart-title {
@@ -42,8 +46,15 @@
 
 .chart-container {
   width: 100%;
+  min-height: 300px;
+  max-width: 100%;
+  display: block;
   position: relative;
   border: 2px solid red;
   box-sizing: border-box;
+
+  display: block;
+  overflow: hidden;
+  min-width: 0;
 }
 
