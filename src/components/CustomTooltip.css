@@ -1,0 +1,46 @@
+.custom-tooltip {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  padding: 12px 14px;
+  min-width: 180px;
+
+  color: #A79277;
+  font-size: 0.85rem;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.tooltip-date {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.tooltip-section {
+  margin-bottom: 6px;
+}
+
+.tooltip-section strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.tooltip-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tooltip-section li {
+  font-size: 0.8rem;
+  margin-bottom: 3px;
+  opacity: 0.85;
+}

@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import CustomTooltip from "./CustomTooltip";
 import "./HabitProgressChart.css";
 
 export const HabitProgressChart = ({ data }) => {
@@ -83,6 +84,7 @@ export const HabitProgressChart = ({ data }) => {
               tickLine={false}
             />
             <Tooltip
+            content={<CustomTooltip />}
               contentStyle={{
                 backgroundColor: "rgba(191, 191, 243, 0.9)",
                 border: "none",
@@ -104,7 +106,7 @@ export const HabitProgressChart = ({ data }) => {
             <Bar
               dataKey="completed"
               stackId="a"
-              fill="url(#completedGradient)"
+              fill="#22c55e"
               radius={[6, 6, 0, 0]}
               isAnimationActive
               animationDuration={1000}
@@ -114,7 +116,7 @@ export const HabitProgressChart = ({ data }) => {
             <Bar
               dataKey="missed"
               stackId="a"
-              fill="url(#missedGradient)"
+              fill="#ef4444"
               radius={[6, 6, 0, 0]}
               isAnimationActive
               animationDuration={1000}

@@ -54,7 +54,7 @@
   box-sizing: border-box;
 
   display: block;
-  overflow: hidden;
+  overflow: relative;
   min-width: 0;
 }
 
