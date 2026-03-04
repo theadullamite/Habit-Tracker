@@ -25,7 +25,7 @@ export const HabitProgressChart = ({ data }) => {
       <div className="chart-container">
         <ResponsiveContainer
           width="100%"
-          height={300}
+          
           style={{ border: "3px solid" }}
         >
           <BarChart
@@ -37,7 +37,7 @@ export const HabitProgressChart = ({ data }) => {
             margin={{
               top: 20,
               right: 30,
-              left: 0,
+              left: -20,
               bottom: 5,
             }}
             
@@ -70,7 +70,7 @@ export const HabitProgressChart = ({ data }) => {
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
-              dy={4}
+              dy={3}
               padding={{ left: 0, right: 0 }}
               scale="point"
             />
@@ -79,6 +79,7 @@ export const HabitProgressChart = ({ data }) => {
               domain={[0, 1]}
               width={30}
               ticks={[0, 1]}
+              hide={false}
               tick={{ fill: "#ccc", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
@@ -106,7 +107,7 @@ export const HabitProgressChart = ({ data }) => {
             <Bar
               dataKey="completed"
               stackId="a"
-              fill="#22c55e"
+              fill="url(#completedGradient)"
               radius={[6, 6, 0, 0]}
               isAnimationActive
               animationDuration={1000}
@@ -116,7 +117,7 @@ export const HabitProgressChart = ({ data }) => {
             <Bar
               dataKey="missed"
               stackId="a"
-              fill="#ef4444"
+              fill="url(#missedGradient)"
               radius={[6, 6, 0, 0]}
               isAnimationActive
               animationDuration={1000}
