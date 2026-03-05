@@ -1,15 +1,8 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import CustomTooltip from "./CustomTooltip";
-import "./HabitProgressChart.css";
+import React from 'react';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css'; // Default styles (customize as needed)
+import CustomTooltip from "./CustomTooltip"; // Reuse if you want advanced tooltips
+import "./HabitProgressChart.css"; // Your existing CSS
 
 export const HabitProgressChart = ({ data }) => {
   console.log("data length:", data?.length);
@@ -19,113 +12,54 @@ export const HabitProgressChart = ({ data }) => {
     return <div className="chart-card">Loading chart...</div>;
   }
 
+  // Transform data: Parse 'Feb 28' to full date like '2026-02-28', use completed as count (1 or 0)
+  const transformedData = data.map(item => {
+    const [month, day] = item.name.split(' ');
+    const monthNum = new Date(`${month} 1`).getMonth() + 1; // e.g., Feb -> 2
+    const year = new Date().getFullYear(); // Assume current year; adjust if needed
+    const date = `${year}-${monthNum.toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const today = new Date();
+      const startDate = new Date(today);
+      startDate.setDate(today.getDate() - 180); //subtract 180 days
+
+    // Extract completed and missed habits
+    const completedHabits = item.habits?.filter(h => h.completed).map(h => h.name) || [];
+    const missedHabits = item.habits?.filter(h => !h.completed).map(h => h.name) || [];
+    const totalHabits = item.habits?.length || 0;
+    const count = totalHabits > 0 ? Math.round((completedHabits.length / totalHabits) * 4) : 0; // Scale 0-4 for colors
+    return {
+      date,
+      count,
+      completedHabits,
+      missedHabits,
+      
+    };
+  });
+
   return (
     <div className="chart-card">
       <h2 className="chart-title">Habit Chart</h2>
       <div className="chart-container">
-        <ResponsiveContainer
-          width="100%"
-          
-          style={{ border: "3px solid" }}
-        >
-          <BarChart
-           
-            data={data}
-            style={{
-              border: "4px solid orange",
-            }}
-            margin={{
-              top: 20,
-              right: 30,
-              left: -20,
-              bottom: 5,
-            }}
-            
-          >
-            <defs>
-              <linearGradient
-                id="completedGradient"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop offset="5%" stopColor="#4bde86" stopOpacity={0.9} />
-                <stop offset="95%" stopColor="#00fecfdd" stopOpacity={0.7} />
-              </linearGradient>
-
-              <linearGradient id="missedGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ff512f" stopOpacity={0.9} />
-                <stop offset="95%" stopColor="#dd2476" stopOpacity={0.7} />
-              </linearGradient>
-            </defs>
-
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.1)"
-            />
-
-            <XAxis
-              dataKey="name"
-              tick={{ fill: "#ccc", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-              dy={3}
-              padding={{ left: 0, right: 0 }}
-              scale="point"
-            />
-
-            <YAxis
-              domain={[0, 1]}
-              width={30}
-              ticks={[0, 1]}
-              hide={false}
-              tick={{ fill: "#ccc", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <Tooltip
-            content={<CustomTooltip />}
-              contentStyle={{
-                backgroundColor: "rgba(191, 191, 243, 0.9)",
-                border: "none",
-                borderRadius: "12px",
-                color: "#fff",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
-              }}
-            />
-
-            <Legend
-              wrapperStyle={{
-                color: "#ddd",
-                paddingTop: "20px",
-              }}
-              verticalAlign="bottom"
-              align="center"
-            />
-
-            <Bar
-              dataKey="completed"
-              stackId="a"
-              fill="url(#completedGradient)"
-              radius={[6, 6, 0, 0]}
-              isAnimationActive
-              animationDuration={1000}
-             
-            />
-
-            <Bar
-              dataKey="missed"
-              stackId="a"
-              fill="url(#missedGradient)"
-              radius={[6, 6, 0, 0]}
-              isAnimationActive
-              animationDuration={1000}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+        <CalendarHeatmap
+          values={transformedData}
+          numDays={180} // Last 6 months; adjust for 365 (1 year) or based on data
+          horizontal={true} // GitHub-style layout
+          showWeekdayLabels={true}
+          gutterSize={3} // Space between squares
+          classForValue={(value) => {
+            if (!value) return 'color-empty'; // No data days (gray)
+            return `color-scale-${value.count}`; // e.g., color-scale-0 (all missed) to color-scale-4 (all completed)
+          }}
+          titleForValue={(value) => {
+            if (!value) return null;
+            const completedList = value.completedHabits.length > 0 ? `Completed: ${value.completedHabits.join(', ')}` : 'No completed habits';
+            const missedList = value.missedHabits.length > 0 ? `Missed: ${value.missedHabits.join(', ')}` : 'No missed habits';
+            return `${value.date}\n${completedList}\n${missedList}`;
+            // Customize further: e.g., add task details if available in data
+          }}
+          // Optional: onClick={(value) => console.log('Clicked:', value)} for interactions
+        />
       </div>
     </div>
   );
 };
-
