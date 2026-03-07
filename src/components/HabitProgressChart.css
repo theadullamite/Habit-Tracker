@@ -4,7 +4,7 @@
   padding: 2rem;
   border-radius: 20px;
   width: 100%;
-  max-width: 800px; /* Increased for wider calendar view (e.g., 6 months) */
+  max-width: 800px;
   display: flex;
   overflow: visible;
   flex-direction: column;
@@ -36,33 +36,31 @@
 
 .chart-container {
   width: 100%;
-  height: 200px; /* Adjusted height for calendar heatmap (less tall than bars) */
+  height: 200px; 
   display: flex;
-  justify-content: center; /* Centers the calendar horizontally */
-  align-items: center; /* Centers vertically; changed from flex-end for calendar */
+  justify-content: center; 
+  align-items: center; 
   position: relative;
   box-sizing: border-box;
-  overflow-x: auto; /* Allows horizontal scroll if calendar exceeds width on small screens */
+  overflow-x: auto; 
   min-width: 0;
 }
 
-/* Additional styles for react-calendar-heatmap */
+
 .react-calendar-heatmap {
-  width: 100%; /* Ensure it fills the container */
-  max-width: 100%; /* Prevent overflow */
+  width: 100%; 
+  max-width: 100%; 
 }
 
 .react-calendar-heatmap text {
-  fill: #ccc; /* Weekday/month labels color */
+  fill: #ccc; 
   font-size: 10px;
 }
 
-.react-calendar-heatmap .react-calendar-heatmap-weekday-labels,
 .react-calendar-heatmap .react-calendar-heatmap-month-labels {
-  fill: #ddd; /* Lighter for labels */
+  fill: #ddd;
 }
 
-/* Color scale for heatmap squares */
 .color-empty {
   fill: #2a2a3a; /* Dark gray for no data */
 }
@@ -86,5 +84,3 @@
 .color-scale-4 {
   fill: #4bde86; /* All completed: Green */
 }
-
-/* Tooltip styling (browser default, but you can override with a custom tooltip component if needed) */

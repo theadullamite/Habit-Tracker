@@ -1,8 +1,8 @@
 import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
-import 'react-calendar-heatmap/dist/styles.css'; // Default styles (customize as needed)
-import CustomTooltip from "./CustomTooltip"; // Reuse if you want advanced tooltips
-import "./HabitProgressChart.css"; // Your existing CSS
+import 'react-calendar-heatmap/dist/styles.css'; 
+import CustomTooltip from "./CustomTooltip"; 
+import "./HabitProgressChart.css"; 
 
 export const HabitProgressChart = ({ data }) => {
   console.log("data length:", data?.length);
@@ -42,7 +42,7 @@ export const HabitProgressChart = ({ data }) => {
       <div className="chart-container">
         <CalendarHeatmap
           values={transformedData}
-          numDays={180} // Last 6 months; adjust for 365 (1 year) or based on data
+          numDays={180} // Last 6 months; 
           horizontal={true} // GitHub-style layout
           showWeekdayLabels={true}
           gutterSize={3} // Space between squares
@@ -55,9 +55,7 @@ export const HabitProgressChart = ({ data }) => {
             const completedList = value.completedHabits.length > 0 ? `Completed: ${value.completedHabits.join(', ')}` : 'No completed habits';
             const missedList = value.missedHabits.length > 0 ? `Missed: ${value.missedHabits.join(', ')}` : 'No missed habits';
             return `${value.date}\n${completedList}\n${missedList}`;
-            // Customize further: e.g., add task details if available in data
           }}
-          // Optional: onClick={(value) => console.log('Clicked:', value)} for interactions
         />
       </div>
     </div>
