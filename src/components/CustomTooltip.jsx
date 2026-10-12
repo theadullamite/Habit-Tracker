@@ -1,4 +1,4 @@
-import './CustomTooltip.css';
+import "./CustomTooltip.css";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -13,9 +13,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         <strong>Completed</strong>
         <ul>
           {data.completedHabits.length > 0 ? (
-            data.completedHabits.map((habit, i) => (
-              <li key={i}>✅ {habit}</li>
-            ))
+            data.completedHabits.map((habit, i) => <li key={i}>✅ {habit}</li>)
           ) : (
             <li>None</li>
           )}
@@ -26,9 +24,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         <strong>Missed</strong>
         <ul>
           {data.missedHabits.length > 0 ? (
-            data.missedHabits.map((habit, i) => (
-              <li key={i}>❌ {habit}</li>
-            ))
+            data.missedHabits.map((habit, i) => <li key={i}>❌ {habit}</li>)
           ) : (
             <li>None</li>
           )}

@@ -33,7 +33,7 @@ function HabitItem({ habit, onRemove, onEdit, setHabits }) {
   const handleEditSubmit = (e) => {
     e.preventDefault();
     onEdit(habit.id, editName); //calls the parent update function
-    setIsEditing(false); //switch back to edit mode
+    setIsEditing(false); 
   };
 
   if (isEditing) {
