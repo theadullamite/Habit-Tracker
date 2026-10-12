@@ -5,8 +5,6 @@ import CustomTooltip from "./CustomTooltip";
 import "./HabitProgressChart.css"; 
 
 export const HabitProgressChart = ({ data }) => {
-  console.log("data length:", data?.length);
-  console.log(data);
 
   if (!data || data.length === 0) {
     return <div className="chart-card">Loading chart...</div>;
@@ -21,7 +19,7 @@ export const HabitProgressChart = ({ data }) => {
 
   // Transform data and extract habits
   const transformedData = data.map(item => {
-    const localToday = DateTime.now().setZone('Africa/Lagos');
+    // const localToday = DateTime.now().setZone('Africa/Lagos');
     const [month, day] = item.name.split(' ');
     const monthNum = new Date(`${month} 1`).getMonth() + 1; // e.g., Feb -> 2
     const year = new Date().getFullYear(); // Assume current year; adjust if needed
