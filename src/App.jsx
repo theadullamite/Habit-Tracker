@@ -48,18 +48,20 @@ function App() {
   }, [habits]);
 
   const chartData = useMemo(() => prepareChartData(habits), [habits]);
-  console.log(habits);
+
 
   return (
     <div className="app">
       <h1 className="app-title">Habit Tracker</h1>
       <HabitForm onAddHabit={addHabit} />
+      
       <HabitList
         habits={habits}
         setHabits={setHabits}
         onRemove={removeHabit}
         onEdit={editHabit}
       />
+
       <div>
         {habits.length > 0 ? (
           <HabitProgressChart data={chartData} />

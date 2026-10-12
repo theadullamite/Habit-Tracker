@@ -19,7 +19,7 @@ export const HabitProgressChart = ({ data }) => {
   const endDate = new Date (today);
   endDate.setDate(today.getDate() + 100);
 
-  // Transform data and exttract habits
+  // Transform data and extract habits
   const transformedData = data.map(item => {
     const localToday = DateTime.now().setZone('Africa/Lagos');
     const [month, day] = item.name.split(' ');
